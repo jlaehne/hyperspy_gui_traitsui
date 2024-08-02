@@ -18,6 +18,7 @@
 
 
 import importlib
+from importlib.metadata import version
 import logging
 from pathlib import Path
 
@@ -27,16 +28,29 @@ from traits.etsconfig.api import ETSConfig
 from hyperspy.defaults_parser import preferences
 
 
-if Path(__file__).parent.parent.name == "site-packages":  # pragma: no cover
-    # Tested in the "Package & Test" workflow on GitHub CI
-    from importlib.metadata import version
+__version__ = version("hyperspy_gui_traitsui")
 
-    __version__ = version("hyperspy_gui_traitsui")
-else:
-    # Editable install
-    from setuptools_scm import get_version
+# For development version, `setuptools_scm` will be used at build time
+# to get the dev version, in case of missing vcs information (git archive,
+# shallow repository), the fallback version defined in pyproject.toml will
+# be used
 
-    __version__ = get_version(Path(__file__).parent.parent)
+# if we have a editable install from a git repository try to use
+# `setuptools_scm` to find a more accurate version:
+# `importlib.metadata` will provide the version at installation
+# time and for editable version this may be different
+
+# we only do that if we have enough git history, e.g. not shallow checkout
+_root = Path(__file__).resolve().parents[1]
+if (_root / ".git").exists() and not (_root / ".git/shallow").exists():
+    try:
+        # setuptools_scm may not be installed
+        from setuptools_scm import get_version
+
+        __version__ = get_version(_root)
+    except ImportError:  # pragma: no cover
+        # setuptools_scm not install, we keep the existing __version__
+        pass
 
 
 
@@ -87,13 +101,13 @@ def set_ets_toolkit(toolkit):
 
 
 # Get the backend from matplotlib
-backend = matplotlib.get_backend()
+backend = matplotlib.get_backend().lower()
 _logger.debug('Loading hyperspy.traitsui_gui')
 _logger.debug('Current MPL backend: %s', backend)
-if "WX" in backend:
+if "wx" in backend:
     set_ets_toolkit("wx")
-elif "Qt" in backend:
-    set_ets_toolkit("qt4")
+elif "qt" in backend:
+    set_ets_toolkit("qt")
 elif ETSConfig.toolkit == "":
     # The toolkit has not been set and no supported toolkit is available, so
     # setting it to "null"
