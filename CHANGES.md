@@ -2,17 +2,31 @@
   Add a single entry in the corresponding section below.
   See https://keepachangelog.com for details
 
-## v2.0.0.dev0 (UNRELEASED)
-* Added github action for code scanning using the codeQL engine. ([#51](https://github.com/hyperspy/hyperspy_gui_traitsui/pull/51))
+## v2.1 (UNRELEASED)
+
+## v2.0.1 (2024-08-05)
+
+* Fix getting matplotlib backend for matplotlib >= 3.10.dev ([#78](https://github.com/hyperspy/hyperspy_gui_traitsui/pull/78)).
+* Use `qt` instead of `qt4` when setting `ETSConfig.toolkit` ([#78](https://github.com/hyperspy/hyperspy_gui_traitsui/pull/78)).
+* Fix slider in image contrast editor on python >=3.10 ([#76](https://github.com/hyperspy/hyperspy_gui_traitsui/pull/76)).
+* Fix getting version with editable installation ([#75](https://github.com/hyperspy/hyperspy_gui_traitsui/pull/75)).
+* Add releasing guide and release script ([#75](https://github.com/hyperspy/hyperspy_gui_traitsui/pull/75)).
+* Fix regression with editable installation ([#74](https://github.com/hyperspy/hyperspy_gui_traitsui/pull/74)).
+
+## v2.0 (2023-11-16)
+
+* Consolidate package metadata into `pyproject.toml` ([#67](https://github.com/hyperspy/hyperspy_gui_traitsui/pull/67))
+* Support HyperSpy 2.0 and set HyperSpy requirement to >=2.0 ([#65](https://github.com/hyperspy/hyperspy_gui_traitsui/pull/65))
+* Remove use of deprecated HyperSpy preferences `warn_if_guis_are_missing` ([#58](https://github.com/hyperspy/hyperspy_gui_traitsui/pull/58))
 * Remove `integrate_in_range` widgets, as the corresponding method has been removed in hyperspy 2.0. ([#53](https://github.com/hyperspy/hyperspy_gui_traitsui/pull/53))
-* Remove use of deprecated HyperSpy preferences `warn_if_guis_are_missing`. ([#58](https://github.com/hyperspy/hyperspy_gui_traitsui/pull/58))
+* Added github action for code scanning using the codeQL engine ([#51](https://github.com/hyperspy/hyperspy_gui_traitsui/pull/51))
 
 ## v1.5.3 (2023-05-30)
 
 * Add explicit support for python 3.11 ([#62](https://github.com/hyperspy/hyperspy_gui_traitsui/pull/62))
-* Fix typo in `ImageContractEditor` GUI. ([#59](https://github.com/hyperspy/hyperspy_gui_traitsui/pull/59))
+* Fix typo in `ImageContractEditor` GUI ([#59](https://github.com/hyperspy/hyperspy_gui_traitsui/pull/59))
 * Exclude `traitsui` 8.0.0 because of a regression in the `BoundsEditor` ([#61](https://github.com/hyperspy/hyperspy_gui_traitsui/pull/61))
-* Fix pyqt installation on GitHub CI. ([#52](https://github.com/hyperspy/hyperspy_gui_traitsui/pull/52))
+* Fix pyqt installation on GitHub CI ([#52](https://github.com/hyperspy/hyperspy_gui_traitsui/pull/52))
 
 ## v1.5.2 (2022-06-18)
 
